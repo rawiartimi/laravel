@@ -1,0 +1,14 @@
+dist: trusty
+
+addons:
+  sonarcloud:
+    organization: "rawiartimi"
+    token:
+      secure: "a707cbc8d65100ae6e0905631699e8aedc8e416c" # encrypted value of your token
+
+install: composer install --prefer-dist
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - vendor/bin/phpunit  --coverage-clover=coverage-report.clover --log-junit=test-report.xml
+  - sonar-scanner
